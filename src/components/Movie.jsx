@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {Image, Pressable, StyleSheet, Text, View} from "react-native";
+import {Image, StyleSheet, Text, View} from "react-native";
 import PrimaryButton from "./PrimaryButton";
 
 const Movie = ({movieTitle, popularity, releaseDate, image}) => {
@@ -15,7 +15,7 @@ const Movie = ({movieTitle, popularity, releaseDate, image}) => {
             </View>
             <View style={styles.separator}></View>
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
