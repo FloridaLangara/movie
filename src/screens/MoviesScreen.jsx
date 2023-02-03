@@ -1,26 +1,16 @@
 import React, {useEffect, useState} from "react";
 import {FlatList, Pressable, SafeAreaView, StyleSheet, Text} from "react-native";
-import {getNowPlayingMovies, getPopularMovies, getTopRatedMovies, getUpcomingMovies} from "../api/movie";
+import {fetchMoviesByCategory} from "../api/movie";
 import BottomSheet from "../components/BottomSheet";
 import Movie from "../components/Movie";
 
 const MoviesScreen = () => {
-    let data;
-
     const [movies, setMovies] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState("popular");
 
     const fetchMovieData = async  () => {
-        if (selectedCategory === "now_playing") {
-            data = await getNowPlayingMovies();
-        } else if (selectedCategory === "popular") {
-            data = await getPopularMovies();
-        } else if (selectedCategory === "upcoming") {
-            data = await getUpcomingMovies();
-        } else if (selectedCategory === "top_rated") {
-            data = await getTopRatedMovies();
-        }
+        const data = await fetchMoviesByCategory(selectedCategory);
         setMovies(data);
     }
 
