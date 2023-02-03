@@ -12,40 +12,21 @@ const BottomSheet = (props) => {
         >
             <View onTouchStart={props.onTouchStart} style={styles.centeredView}>
                 <View style={styles.modalView}>
-                    <TouchableOpacity
-                        style={props.selected === "now_playing"? styles.selectedButton : styles.button}
-                        onPress={() => {
-                            props.onCategoryChangePress("now_playing")
-                        }}
-                    >
-                        <Text style={props.selected === "now_playing"? styles.selectedText : styles.textStyle}>
-                            now_playing
-                        </Text>
-                    </TouchableOpacity >
-                     <TouchableOpacity
-                         style={props.selected === "popular"? styles.selectedButton : styles.button}
-                         onPress={() => props.onCategoryChangePress("popular")}
-                     >
-                        <Text style={props.selected === "popular"? styles.selectedText : styles.textStyle}>
-                            popular
-                        </Text>
-                    </TouchableOpacity>
-                     <TouchableOpacity
-                         style={props.selected === "top_rated"? styles.selectedButton : styles.button}
-                         onPress={() => props.onCategoryChangePress("top_rated")}
-                     >
-                        <Text style={props.selected === "top_rated"? styles.selectedText : styles.textStyle}>
-                            top_rated
-                        </Text>
-                    </TouchableOpacity>
-                     <TouchableOpacity
-                         style={props.selected === "upcoming"? styles.selectedButton : styles.button}
-                         onPress={() => props.onCategoryChangePress("upcoming")}
-                     >
-                        <Text style={props.selected === "upcoming"? styles.selectedText : styles.textStyle}>
-                            upcoming
-                        </Text>
-                    </TouchableOpacity>
+                    { props.options?.map((option, index) => {
+                        return (
+                            <TouchableOpacity
+                                key={index}
+                                style={props.selected === option ? styles.selectedButton : styles.button}
+                                onPress={() => {
+                                    props.onCategoryChangePress(option)
+                                }}
+                            >
+                                <Text style={props.selected === option ? styles.selectedText : styles.textStyle}>
+                                    {option}
+                                </Text>
+                            </TouchableOpacity >
+                        );
+                    })}
                     <Button title={"close"} onPress={props.onClose}/>
                 </View>
             </View>
