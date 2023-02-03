@@ -29,3 +29,18 @@ export function fetchTvShowsByCategory(selectedCategory) {
             return data.results;
         })
 }
+
+//Get Movie Details
+export function getMovieDetails(movieId) {
+//     return fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`)
+//         .then((response) => response.json())
+//         .then((data) => {
+//             return data;
+//         })
+
+    return fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`)
+        .then((response) => response.json())
+        .then((data) => {
+            return data;
+        })
+}
