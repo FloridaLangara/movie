@@ -1,13 +1,16 @@
 import React, {useEffect, useState} from "react";
-import {FlatList, Pressable, SafeAreaView, StyleSheet, Text} from "react-native";
+import {FlatList, SafeAreaView } from "react-native";
 import {fetchMoviesByCategory} from "../api/movie";
 import BottomSheet from "../components/BottomSheet";
+import BottomSheetButton from "../components/BottomSheetButton";
 import Movie from "../components/Movie";
 
 const MoviesScreen = () => {
     const [movies, setMovies] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState("popular");
+
+    const options = ["now_playing", "popular", "top_rated", "upcoming"];
 
     const fetchMovieData = async  () => {
         const data = await fetchMoviesByCategory(selectedCategory);
@@ -20,9 +23,11 @@ const MoviesScreen = () => {
 
     return (
         <SafeAreaView>
-            <Pressable style={styles.topButton} visible={modalVisible} onPress={() => setModalVisible(true)}>
-                <Text style={styles.buttonText}>{selectedCategory}</Text>
-            </Pressable>
+            <BottomSheetButton
+                modalVisible={modalVisible}
+                onBottomSheetButtonPress={() => setModalVisible(true)}
+                title={selectedCategory}
+            />
             <BottomSheet
                 onRequestClose={() => setModalVisible(!modalVisible)}
                 visible={modalVisible}
@@ -30,6 +35,7 @@ const MoviesScreen = () => {
                 onCategoryChangePress={(value) => {
                     setSelectedCategory(value);
                 }}
+                options={options}
                 selected={selectedCategory}
             />
             <FlatList
@@ -45,23 +51,5 @@ const MoviesScreen = () => {
         </SafeAreaView>
     )
 }
-
-const styles = StyleSheet.create({
-    topButton: {
-        width: 200,
-        height: 36,
-        borderWidth: 2,
-        borderColor: "#e9e9e9",
-        borderRadius: 8,
-        marginVertical: 20,
-        marginHorizontal: 30,
-        alignSelf: "center"
-    },
-    buttonText: {
-        padding: 4,
-        paddingLeft: 6,
-        fontSize: 14,
-    }
-})
 
 export default MoviesScreen;
