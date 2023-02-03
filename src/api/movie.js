@@ -9,19 +9,25 @@ export function getNowPlayingMovies() {
 }
 
 export function getPopularMovies() {
-    fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`)
+    return fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`)
         .then((response) => response.json())
-        .then((data) => console.log(data));
+        .then((data) => {
+            return data.results
+        });
 }
 
 export function getTopRatedMovies() {
-    fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1`)
+    return fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1`)
         .then((response) => response.json())
-        .then((data) => console.log(data));
+        .then((data) => {
+            return data.results;
+        });
 }
 
 export function getUpcomingMovies() {
-    fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=1`)
+    return fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=1`)
         .then((response) => response.json())
-        .then((data) => console.log(data));
+        .then((data) => {
+            return data.results;
+        });
 }
