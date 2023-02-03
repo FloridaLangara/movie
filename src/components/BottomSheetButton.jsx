@@ -8,7 +8,7 @@ const BottomSheetButton = (props) => {
                 <Text style={styles.buttonText}>{props.title}</Text>
             </Pressable>
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
@@ -27,5 +27,6 @@ const styles = StyleSheet.create({
         paddingLeft: 6,
         fontSize: 14,
     }
-})
+});
+
 export default BottomSheetButton;

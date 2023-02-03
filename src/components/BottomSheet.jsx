@@ -33,6 +33,7 @@ const BottomSheet = (props) => {
         </Modal>
     );
 };
+
 const styles = StyleSheet.create({
     centeredView: {
         flex: 1,

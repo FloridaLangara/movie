@@ -32,7 +32,6 @@ const SearchScreen = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-
             <Text>Search Movie/TV Show Name</Text>
             <TextInput
                 onChangeText={(value) => setSearchTerm(value)}
@@ -64,7 +63,6 @@ const SearchScreen = () => {
                 options={options}
             />
             {error ? <Text style={styles.errorText}>Movie/TV Show name is required</Text> : ""}
-
             {searchResult.length === 0 ?  <Text style={styles.placeholderText}>Please initiate a search </Text> :
                 <FlatList
                     data={searchResult}
@@ -78,7 +76,7 @@ const SearchScreen = () => {
                 />
             }
         </SafeAreaView>
-    )
+    );
 }
 
 const styles = StyleSheet.create( {
@@ -122,6 +120,5 @@ const styles = StyleSheet.create( {
         marginTop: 65,
     }
 })
-
 
 export default SearchScreen;
