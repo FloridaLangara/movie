@@ -1,10 +1,11 @@
 import React, {useState} from "react";
 import {Pressable, SafeAreaView, Text, View, StyleSheet, TextInput, FlatList} from "react-native";
+import { AntDesign } from '@expo/vector-icons';
+
 import {searchByCategory} from "../api/movie";
 import BottomSheet from "../components/BottomSheet";
 import BottomSheetButton from "../components/BottomSheetButton";
 import Movie from "../components/Movie";
-import { AntDesign } from '@expo/vector-icons';
 
 const SearchScreen = ({navigation}) => {
     const [selectedCategory, setSelectedCategory] = useState("multi");

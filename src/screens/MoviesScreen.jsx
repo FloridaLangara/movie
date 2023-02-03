@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {FlatList, SafeAreaView } from "react-native";
+
 import {fetchMoviesByCategory} from "../api/movie";
 import BottomSheet from "../components/BottomSheet";
 import BottomSheetButton from "../components/BottomSheetButton";

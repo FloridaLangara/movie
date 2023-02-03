@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {Image, SafeAreaView, StyleSheet, Text, View} from "react-native";
+
 import {getMovieDetails} from "../api/movie";
 
 const MovieDetailsScreen = ({route, navigation}) => {
