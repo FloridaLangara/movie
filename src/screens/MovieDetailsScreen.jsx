@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Image, SafeAreaView, StyleSheet, Text, View} from "react-native";
+import {Image, SafeAreaView, ScrollView, StyleSheet, Text, View} from "react-native";
 
 import {getMovieDetails} from "../api/movie";
 
@@ -24,13 +24,15 @@ const MovieDetailsScreen = ({route, navigation}) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.title}>{movieDetails?.title}</Text>
-            <Image style={styles.image} source={{uri: "https://images.pexels.com/photos/274937/pexels-photo-274937.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"}}/>
-            <Text style={styles.description}>{movieDetails?.overview}</Text>
-            <View style={styles.secondContainer}>
-                <Text style={styles.footerText}>Popularity: {movieDetails?.popularity} | </Text>
-                <Text style={styles.footerText}>Release Date: {movieDetails?.release_date}</Text>
-            </View>
+            <ScrollView>
+                <Text style={styles.title}>{movieDetails?.title}</Text>
+                <Image style={styles.image} source={{uri: "https://images.pexels.com/photos/274937/pexels-photo-274937.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"}}/>
+                <Text style={styles.description}>{movieDetails?.overview}</Text>
+                <View style={styles.secondContainer}>
+                    <Text style={styles.footerText}>Popularity: {movieDetails?.popularity} | </Text>
+                    <Text style={styles.footerText}>Release Date: {movieDetails?.release_date}</Text>
+                </View>
+            </ScrollView>
         </SafeAreaView>
     );
 }
