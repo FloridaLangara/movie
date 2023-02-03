@@ -2,16 +2,22 @@ import {useState} from "react";
 import {Image, StyleSheet, Text, View} from "react-native";
 import PrimaryButton from "./PrimaryButton";
 
-const Movie = ({movieTitle, popularity, releaseDate, image}) => {
+const Movie = ({movieTitle, popularity, releaseDate, image, onMoreDetailsPress}) => {
     const [error, setError] = useState(false);
+
     return (
         <View style={styles.container}>
-            <Image style={styles.image} accessibilityLabel={"Poster of the movie"} onError={() => setError(true)} source={{uri: error ? "https://images.pexels.com/photos/1983037/pexels-photo-1983037.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" :`https://api.themoviedb.org${image}`}}/>
+            <Image style={styles.image}
+                   accessibilityLabel={"Poster of the movie"}
+                   onError={() => setError(true)}
+                   source={{uri: error ? "https://images.pexels.com/photos/1983037/pexels-photo-1983037.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                           :`https://api.themoviedb.org${image}`}}
+            />
             <View style={styles.textContainer}>
                 <Text style={styles.movieTitle}>{movieTitle}</Text>
                 <Text>Popularity: {popularity}</Text>
                 <Text>Release Date: {releaseDate}</Text>
-                <PrimaryButton title={"More Details"} />
+                <PrimaryButton onPress={onMoreDetailsPress} title={"More Details"} />
             </View>
             <View style={styles.separator}></View>
         </View>
