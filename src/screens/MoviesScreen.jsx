@@ -4,6 +4,8 @@ import {fetchMoviesByCategory} from "../api/movie";
 import BottomSheet from "../components/BottomSheet";
 import BottomSheetButton from "../components/BottomSheetButton";
 import Movie from "../components/Movie";
+import Ionicons from '@expo/vector-icons/Ionicons';
+
 
 const MoviesScreen = ({navigation}) => {
     const [movies, setMovies] = useState([]);

@@ -1,3 +1,4 @@
+import {AntDesign} from "@expo/vector-icons";
 import React from "react";
 import {Button, Modal, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
@@ -21,9 +22,12 @@ const BottomSheet = (props) => {
                                     props.onCategoryChangePress(option)
                                 }}
                             >
-                                <Text style={props.selected === option ? styles.selectedText : styles.textStyle}>
-                                    {option}
-                                </Text>
+                                <View style={styles.checkContainer}>
+                                    <Text style={props.selected === option ? styles.selectedText : styles.textStyle}>
+                                        {option}
+                                    </Text>
+                                    <AntDesign name="check" size={18} color="white" />
+                                </View>
                             </TouchableOpacity >
                         );
                     })}
@@ -40,6 +44,9 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         alignItems: 'center',
         marginTop: 40,
+    },
+    checkContainer: {
+        flexDirection:"row",
     },
     modalView: {
         width: '100%',
@@ -76,6 +83,7 @@ const styles = StyleSheet.create({
     selectedText: {
         color: "white",
         fontSize: 16,
+        marginRight: 4,
     },
     textStyle: {
         fontSize: 16,

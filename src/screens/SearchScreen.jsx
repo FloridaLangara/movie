@@ -4,6 +4,7 @@ import {searchByCategory} from "../api/movie";
 import BottomSheet from "../components/BottomSheet";
 import BottomSheetButton from "../components/BottomSheetButton";
 import Movie from "../components/Movie";
+import { AntDesign } from '@expo/vector-icons';
 
 const SearchScreen = ({navigation}) => {
     const [selectedCategory, setSelectedCategory] = useState("multi");
@@ -39,14 +40,16 @@ const SearchScreen = ({navigation}) => {
     return (
         <SafeAreaView style={styles.container}>
             <Text>Search Movie/TV Show Name</Text>
-            <TextInput
-                onChangeText={(value) => setSearchTerm(value)}
-                value={searchTerm}
-                style={[styles.textInputStyle, isFocused && styles.inputFocused]}
-                onSubmitEditing={validateTextInput}
-                onFocus={() => setIsFocused(true)}
-                placeholder={"i.e James Bond, CSI"}
-            />
+            <View style={[styles.textInputStyle, isFocused && styles.inputFocused]}>
+                <AntDesign style={{marginHorizontal: 8}} name="search1" size={18} color="gray" />
+                <TextInput
+                    onChangeText={(value) => setSearchTerm(value)}
+                    value={searchTerm}
+                    onSubmitEditing={validateTextInput}
+                    onFocus={() => setIsFocused(true)}
+                    placeholder={"i.e James Bond, CSI"}
+                />
+            </View>
             <Text>Choose Search Type</Text>
             <View style={styles.buttonContainer}>
                 <BottomSheetButton
@@ -55,7 +58,8 @@ const SearchScreen = ({navigation}) => {
                     title={selectedCategory}
                 />
                 <Pressable  style={styles.button} onPress={onSearchPress}>
-                    <Text style={styles.buttonText}>Search</Text>
+                        <AntDesign style={{marginHorizontal: 4}} name="search1" size={18} color="white" />
+                        <Text style={styles.buttonText}>Search</Text>
                 </Pressable>
             </View>
             <BottomSheet
@@ -68,6 +72,7 @@ const SearchScreen = ({navigation}) => {
                 selected={selectedCategory}
                 options={options}
             />
+            <Text>Please select a search type</Text>
             {error ? <Text style={styles.errorText}>Movie/TV Show name is required</Text> : ""}
             {searchResult.length === 0 ?  <Text style={styles.placeholderText}>Please initiate a search </Text> :
                 <FlatList
@@ -90,6 +95,10 @@ const styles = StyleSheet.create( {
     button: {
         backgroundColor: "#06b6d4",
         borderRadius: 4,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginLeft: 20,
     },
     buttonContainer: {
         flexDirection: "row",
@@ -101,20 +110,21 @@ const styles = StyleSheet.create( {
         color: "white",
     },
     container: {
-        marginHorizontal: 12,
+        marginHorizontal: 25,
         marginVertical: 16,
     },
     errorText: {
        color: "red",
     },
     textInputStyle: {
-        width: "80%",
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: "100%",
         height: 36,
         borderWidth: 2,
         borderColor: "#e9e9e9",
         borderRadius: 8,
         marginVertical: 20,
-        marginHorizontal: 30,
     },
     inputFocused: {
       borderColor: "red"
