@@ -5,7 +5,7 @@ import BottomSheet from "../components/BottomSheet";
 import BottomSheetButton from "../components/BottomSheetButton";
 import Movie from "../components/Movie";
 
-const TVShowsScreen = () => {
+const TVShowsScreen = ({navigation}) => {
     const [tvShows, setTvShows] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState("popular");
@@ -15,6 +15,12 @@ const TVShowsScreen = () => {
     const fetchTVShowData = async  () => {
         const data = await fetchTvShowsByCategory(selectedCategory);
         setTvShows(data);
+    }
+
+    const onMoreDetailsPress = (movieId) => {
+        navigation.navigate("Movie Details", {
+            movieId: movieId
+        })
     }
 
     useEffect(() => {
@@ -46,6 +52,7 @@ const TVShowsScreen = () => {
                         movieTitle={item.name}
                         popularity={item.popularity}
                         releaseDate={item.first_air_date}
+                        onMoreDetailsPress={() => onMoreDetailsPress(item.id)}
                     />}
             />
         </SafeAreaView>
