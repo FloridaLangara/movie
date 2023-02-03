@@ -1,6 +1,6 @@
 import {AntDesign} from "@expo/vector-icons";
 import React from "react";
-import {Button, Modal, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {Modal, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
 const BottomSheet = (props) => {
     return (
@@ -31,7 +31,6 @@ const BottomSheet = (props) => {
                             </TouchableOpacity >
                         );
                     })}
-                    <Button title={"close"} onPress={props.onClose}/>
                 </View>
             </View>
         </Modal>

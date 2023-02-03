@@ -39,7 +39,10 @@ const SearchScreen = ({navigation}) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text>Search Movie/TV Show Name</Text>
+            <View style={styles.headerContainer}>
+                <Text>Search Movie/TV Show Name</Text>
+                <Text style={styles.redStar}>*</Text>
+            </View>
             <View style={[styles.textInputStyle, isFocused && styles.inputFocused]}>
                 <AntDesign style={{marginHorizontal: 8}} name="search1" size={18} color="gray" />
                 <TextInput
@@ -50,7 +53,10 @@ const SearchScreen = ({navigation}) => {
                     placeholder={"i.e James Bond, CSI"}
                 />
             </View>
-            <Text>Choose Search Type</Text>
+            <View style={styles.headerContainer}>
+                <Text>Choose Search Type</Text>
+                <Text style={styles.redStar}>*</Text>
+            </View>
             <View style={styles.buttonContainer}>
                 <BottomSheetButton
                     modalVisible={modalVisible}
@@ -65,16 +71,16 @@ const SearchScreen = ({navigation}) => {
             <BottomSheet
                 onRequestClose={() => setModalVisible(!modalVisible)}
                 visible={modalVisible}
-                onClose ={() => setModalVisible(false)}
                 onCategoryChangePress={(value) => {
                     setSelectedCategory(value);
+                    setModalVisible(false);
                 }}
                 selected={selectedCategory}
                 options={options}
             />
             <Text>Please select a search type</Text>
             {error ? <Text style={styles.errorText}>Movie/TV Show name is required</Text> : ""}
-            {searchResult.length === 0 ?  <Text style={styles.placeholderText}>Please initiate a search </Text> :
+            {searchResult?.length === 0 ?  <Text style={styles.placeholderText}>Please initiate a search </Text> :
                 <FlatList
                     data={searchResult}
                     renderItem={({item}) =>
@@ -135,6 +141,12 @@ const styles = StyleSheet.create( {
         justifyContent: "center",
         fontWeight: "bold",
         marginTop: 65,
+    },
+    headerContainer: {
+        flexDirection: "row"
+    },
+    redStar: {
+        color: "red",
     }
 })
 

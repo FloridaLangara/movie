@@ -2,22 +2,28 @@ import {useEffect, useState} from "react";
 import {Image, SafeAreaView, StyleSheet, Text, View} from "react-native";
 import {getMovieDetails} from "../api/movie";
 
-const MovieDetailsScreen = ({route}) => {
+const MovieDetailsScreen = ({route, navigation}) => {
     const [movieDetails, setMovieDetails] = useState({});
 
     const fetchMovieDetailsData = async  () => {
         const data = await getMovieDetails(route?.params?.movieId);
         setMovieDetails(data);
+
     }
 
     useEffect( () => {
         fetchMovieDetailsData();
     }, [route?.params?.movieId]);
 
+    useEffect(() => {
+        navigation.setOptions({ headerTitle: movieDetails?.title })
+    }, [movieDetails?.title]);
+
+
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.title}>{movieDetails?.original_title}</Text>
+            <Text style={styles.title}>{movieDetails?.title}</Text>
             <Image style={styles.image} source={{uri: "https://images.pexels.com/photos/274937/pexels-photo-274937.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"}}/>
             <Text style={styles.description}>{movieDetails?.overview}</Text>
             <View style={styles.secondContainer}>

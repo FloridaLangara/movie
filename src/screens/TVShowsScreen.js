@@ -37,9 +37,9 @@ const TVShowsScreen = ({navigation}) => {
             <BottomSheet
                 onRequestClose={() => setModalVisible(!modalVisible)}
                 visible={modalVisible}
-                onClose ={() => setModalVisible(false)}
                 onCategoryChangePress={(value) => {
                     setSelectedCategory(value);
+                    setModalVisible(false);
                 }}
                 options={options}
                 selected={selectedCategory}
