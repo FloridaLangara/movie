@@ -5,7 +5,7 @@ import BottomSheet from "../components/BottomSheet";
 import BottomSheetButton from "../components/BottomSheetButton";
 import Movie from "../components/Movie";
 
-const SearchScreen = () => {
+const SearchScreen = ({navigation}) => {
     const [selectedCategory, setSelectedCategory] = useState("multi");
     const [modalVisible, setModalVisible] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
@@ -28,6 +28,12 @@ const SearchScreen = () => {
         validateTextInput();
         const data = await searchByCategory(searchTerm, selectedCategory);
         setSearchResult(data);
+    }
+
+    const onMoreDetailsPress = (movieId) => {
+        navigation.navigate("Movie Details", {
+            movieId: movieId
+        })
     }
 
     return (
@@ -72,6 +78,7 @@ const SearchScreen = () => {
                             movieTitle={item.title}
                             popularity={item.popularity}
                             releaseDate={item.release_date}
+                            onMoreDetailsPress={() => onMoreDetailsPress(item.id)}
                         />}
                 />
             }
