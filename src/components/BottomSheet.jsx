@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         alignItems: 'center',
         marginTop: 40,
-        backgroundColor: 'rgba(52, 52, 52, 0.5)'
+        backgroundColor: 'rgba(52, 52, 52, 0.3)'
     },
     checkContainer: {
         flexDirection:"row",
