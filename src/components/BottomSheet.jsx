@@ -1,5 +1,6 @@
+import {AntDesign} from "@expo/vector-icons";
 import React from "react";
-import {Button, Modal, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {Modal, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
 const BottomSheet = (props) => {
     return (
@@ -8,7 +9,7 @@ const BottomSheet = (props) => {
             transparent={true}
             visible={props.visible}
             onRequestClose={props.onRequestClose}
-            style={{flex: 1}}
+            style={styles.modalContainer}
         >
             <View onTouchStart={props.onTouchStart} style={styles.centeredView}>
                 <View style={styles.modalView}>
@@ -21,13 +22,15 @@ const BottomSheet = (props) => {
                                     props.onCategoryChangePress(option)
                                 }}
                             >
-                                <Text style={props.selected === option ? styles.selectedText : styles.textStyle}>
-                                    {option}
-                                </Text>
+                                <View style={styles.checkContainer}>
+                                    <Text style={props.selected === option ? styles.selectedText : styles.textStyle}>
+                                        {option}
+                                    </Text>
+                                    <AntDesign name="check" size={18} color="white" />
+                                </View>
                             </TouchableOpacity >
                         );
                     })}
-                    <Button title={"close"} onPress={props.onClose}/>
                 </View>
             </View>
         </Modal>
@@ -40,6 +43,10 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         alignItems: 'center',
         marginTop: 40,
+        backgroundColor: 'rgba(52, 52, 52, 0.5)'
+    },
+    checkContainer: {
+        flexDirection:"row",
     },
     modalView: {
         width: '100%',
@@ -56,6 +63,9 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 5,
+    },
+    modalContainer: {
+        flex: 1,
     },
     button: {
         alignSelf: "flex-start",
@@ -76,6 +86,7 @@ const styles = StyleSheet.create({
     selectedText: {
         color: "white",
         fontSize: 16,
+        marginRight: 4,
     },
     textStyle: {
         fontSize: 16,

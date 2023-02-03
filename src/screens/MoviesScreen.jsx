@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {FlatList, SafeAreaView } from "react-native";
+
 import {fetchMoviesByCategory} from "../api/movie";
 import BottomSheet from "../components/BottomSheet";
 import BottomSheetButton from "../components/BottomSheetButton";
@@ -37,9 +38,9 @@ const MoviesScreen = ({navigation}) => {
             <BottomSheet
                 onRequestClose={() => setModalVisible(!modalVisible)}
                 visible={modalVisible}
-                onClose ={() => setModalVisible(false)}
                 onCategoryChangePress={(value) => {
                     setSelectedCategory(value);
+                    setModalVisible(false);
                 }}
                 options={options}
                 selected={selectedCategory}
@@ -52,11 +53,11 @@ const MoviesScreen = ({navigation}) => {
                         movieTitle={item.title}
                         popularity={item.popularity}
                         releaseDate={item.release_date}
-                        onMoreDetailsPress={() => onMoreDetailsPress(item.id)}
+                        onMoreDetailsPress={() => onMoreDetailsPress(item.id, item.title)}
                     />}
             />
         </SafeAreaView>
-    )
+    );
 }
 
 export default MoviesScreen;

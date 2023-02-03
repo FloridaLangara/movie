@@ -1,11 +1,13 @@
 import React, {useState} from "react";
 import {Pressable, SafeAreaView, Text, View, StyleSheet, TextInput, FlatList} from "react-native";
+import { AntDesign } from '@expo/vector-icons';
+
 import {searchByCategory} from "../api/movie";
 import BottomSheet from "../components/BottomSheet";
 import BottomSheetButton from "../components/BottomSheetButton";
 import Movie from "../components/Movie";
 
-const SearchScreen = () => {
+const SearchScreen = ({navigation}) => {
     const [selectedCategory, setSelectedCategory] = useState("multi");
     const [modalVisible, setModalVisible] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
@@ -30,18 +32,32 @@ const SearchScreen = () => {
         setSearchResult(data);
     }
 
+    const onMoreDetailsPress = (movieId) => {
+        navigation.navigate("Movie Details", {
+            movieId: movieId
+        })
+    }
+
     return (
         <SafeAreaView style={styles.container}>
-            <Text>Search Movie/TV Show Name</Text>
-            <TextInput
-                onChangeText={(value) => setSearchTerm(value)}
-                value={searchTerm}
-                style={[styles.textInputStyle, isFocused && styles.inputFocused]}
-                onSubmitEditing={validateTextInput}
-                onFocus={() => setIsFocused(true)}
-                placeholder={"i.e James Bond, CSI"}
-            />
-            <Text>Choose Search Type</Text>
+            <View style={styles.headerContainer}>
+                <Text>Search Movie/TV Show Name</Text>
+                <Text style={styles.redStar}>*</Text>
+            </View>
+            <View style={[styles.textInputStyle, isFocused && styles.inputFocused]}>
+                <AntDesign style={{marginHorizontal: 8}} name="search1" size={18} color="gray" />
+                <TextInput
+                    onChangeText={(value) => setSearchTerm(value)}
+                    value={searchTerm}
+                    onSubmitEditing={validateTextInput}
+                    onFocus={() => setIsFocused(true)}
+                    placeholder={"i.e James Bond, CSI"}
+                />
+            </View>
+            <View style={styles.headerContainer}>
+                <Text>Choose Search Type</Text>
+                <Text style={styles.redStar}>*</Text>
+            </View>
             <View style={styles.buttonContainer}>
                 <BottomSheetButton
                     modalVisible={modalVisible}
@@ -49,21 +65,23 @@ const SearchScreen = () => {
                     title={selectedCategory}
                 />
                 <Pressable  style={styles.button} onPress={onSearchPress}>
-                    <Text style={styles.buttonText}>Search</Text>
+                        <AntDesign style={{marginHorizontal: 4}} name="search1" size={18} color="white" />
+                        <Text style={styles.buttonText}>Search</Text>
                 </Pressable>
             </View>
             <BottomSheet
                 onRequestClose={() => setModalVisible(!modalVisible)}
                 visible={modalVisible}
-                onClose ={() => setModalVisible(false)}
                 onCategoryChangePress={(value) => {
                     setSelectedCategory(value);
+                    setModalVisible(false);
                 }}
                 selected={selectedCategory}
                 options={options}
             />
+            <Text>Please select a search type</Text>
             {error ? <Text style={styles.errorText}>Movie/TV Show name is required</Text> : ""}
-            {searchResult.length === 0 ?  <Text style={styles.placeholderText}>Please initiate a search </Text> :
+            {searchResult?.length === 0 ?  <Text style={styles.placeholderText}>Please initiate a search </Text> :
                 <FlatList
                     data={searchResult}
                     renderItem={({item}) =>
@@ -72,6 +90,7 @@ const SearchScreen = () => {
                             movieTitle={item.title}
                             popularity={item.popularity}
                             releaseDate={item.release_date}
+                            onMoreDetailsPress={() => onMoreDetailsPress(item.id)}
                         />}
                 />
             }
@@ -83,6 +102,10 @@ const styles = StyleSheet.create( {
     button: {
         backgroundColor: "#06b6d4",
         borderRadius: 4,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginLeft: 20,
     },
     buttonContainer: {
         flexDirection: "row",
@@ -94,20 +117,21 @@ const styles = StyleSheet.create( {
         color: "white",
     },
     container: {
-        marginHorizontal: 12,
+        marginHorizontal: 25,
         marginVertical: 16,
     },
     errorText: {
        color: "red",
     },
     textInputStyle: {
-        width: "80%",
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: "100%",
         height: 36,
         borderWidth: 2,
         borderColor: "#e9e9e9",
         borderRadius: 8,
         marginVertical: 20,
-        marginHorizontal: 30,
     },
     inputFocused: {
       borderColor: "red"
@@ -118,6 +142,12 @@ const styles = StyleSheet.create( {
         justifyContent: "center",
         fontWeight: "bold",
         marginTop: 65,
+    },
+    headerContainer: {
+        flexDirection: "row"
+    },
+    redStar: {
+        color: "red",
     }
 })
 
