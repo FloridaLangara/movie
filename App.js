@@ -24,9 +24,9 @@ const App = () => {
   return (
       <SafeAreaView style={{flex: 1}}>
           <NavigationContainer>
-              <Stack.Navigator initialRoute={"Movies App"}>
-                  <Stack.Screen name={"Movie Details"} component={MovieDetailsScreen}/>
+              <Stack.Navigator>
                   <Stack.Screen name="Movies App" component={Home} />
+                  <Stack.Screen name={"Movie Details"} component={MovieDetailsScreen}/>
               </Stack.Navigator>
           </NavigationContainer>
       </SafeAreaView>

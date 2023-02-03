@@ -6,14 +6,13 @@ const MovieDetailsScreen = ({route}) => {
     const [movieDetails, setMovieDetails] = useState({});
 
     const fetchMovieDetailsData = async  () => {
-        const data = await getMovieDetails(route.params.movieId);
+        const data = await getMovieDetails(route?.params?.movieId);
         setMovieDetails(data);
-        console.log(JSON.stringify(movieDetails));
     }
 
     useEffect( () => {
-        fetchMovieDetailsData(route.params.movieId);
-    }, [route.params.movieId]);
+        fetchMovieDetailsData();
+    }, [route?.params?.movieId]);
 
 
     return (
